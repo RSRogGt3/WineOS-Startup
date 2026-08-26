@@ -1,0 +1,7 @@
+{
+  "name": "Arch Wine OS Studio",
+  "description": "Interactive configuration studio, package manager, and ISO build script generator for Arch Linux Wine OS.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
