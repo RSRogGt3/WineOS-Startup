@@ -9,6 +9,7 @@ import { IsoConfigurator } from './components/IsoConfigurator';
 import { SecurityWineConfig } from './components/SecurityWineConfig';
 import { BuildSimulator } from './components/BuildSimulator';
 import { AiAssistant } from './components/AiAssistant';
+import { GoogleTasksManager } from './components/GoogleTasksManager';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('files');
@@ -81,6 +82,7 @@ export default function App() {
             setSecurityScript={setSecurityScript}
           />
         )}
+        {activeTab === 'tasks' && <GoogleTasksManager />}
         {activeTab === 'simulator' && <BuildSimulator />}
         {activeTab === 'ai' && <AiAssistant />}
       </main>

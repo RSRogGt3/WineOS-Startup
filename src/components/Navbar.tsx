@@ -1,5 +1,5 @@
 import React from 'react';
-import { Terminal, Download, FileCode, Package, Sliders, Shield, Bot, Check } from 'lucide-react';
+import { Terminal, Download, FileCode, Package, Sliders, Shield, Bot, Check, CheckSquare } from 'lucide-react';
 
 interface NavbarProps {
   activeTab: string;
@@ -21,6 +21,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'packages', label: 'Package Manager', icon: Package },
     { id: 'config', label: 'ISO Profile', icon: Sliders },
     { id: 'security', label: 'Security & Wine', icon: Shield },
+    { id: 'tasks', label: 'Google Tasks', icon: CheckSquare },
     { id: 'simulator', label: 'Build Simulator', icon: Terminal },
     { id: 'ai', label: 'Arch AI Expert', icon: Bot },
   ];

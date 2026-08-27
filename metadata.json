@@ -1,6 +1,6 @@
 {
   "name": "Arch Wine OS Studio",
-  "description": "Interactive configuration studio, package manager, and ISO build script generator for Arch Linux Wine OS.",
+  "description": "Interactive configuration studio, package manager, ISO build script generator, and Google Tasks sync for Arch Linux Wine OS.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

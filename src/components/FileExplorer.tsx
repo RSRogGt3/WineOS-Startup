@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ProjectFiles } from '../types';
-import { FileText, Copy, Download, Check, Terminal, Shield, Package, Cpu } from 'lucide-react';
+import { FileText, Copy, Check, Terminal, Shield, Package, Cpu } from 'lucide-react';
 
 interface FileExplorerProps {
   files: ProjectFiles;
@@ -25,20 +25,6 @@ export const FileExplorer: React.FC<FileExplorerProps> = ({ files }) => {
     navigator.clipboard.writeText(content);
     setCopiedFile(id);
     setTimeout(() => setCopiedFile(null), 2000);
-  };
-
-  const handleDownloadSingle = () => {
-    const fileInfo = fileList.find(f => f.id === selectedFile);
-    if (!fileInfo) return;
-    const blob = new Blob([currentContent], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = fileInfo.name;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
   };
 
   return (
@@ -85,31 +71,22 @@ export const FileExplorer: React.FC<FileExplorerProps> = ({ files }) => {
               {fileList.find(f => f.id === selectedFile)?.desc}
             </p>
           </div>
-          <div className="flex items-center space-x-2">
-            <button
-              onClick={handleDownloadSingle}
-              className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition-colors shadow cursor-pointer"
-            >
-              <Download className="w-3.5 h-3.5" />
-              <span>Download File</span>
-            </button>
-            <button
-              onClick={() => handleCopy(currentContent, selectedFile)}
-              className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium transition-colors border border-slate-700 cursor-pointer"
-            >
-              {copiedFile === selectedFile ? (
-                <>
-                  <Check className="w-3.5 h-3.5 text-emerald-400" />
-                  <span className="text-emerald-400">Copied!</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="w-3.5 h-3.5 text-indigo-400" />
-                  <span>Copy Code</span>
-                </>
-              )}
-            </button>
-          </div>
+          <button
+            onClick={() => handleCopy(currentContent, selectedFile)}
+            className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium transition-colors border border-slate-700 cursor-pointer"
+          >
+            {copiedFile === selectedFile ? (
+              <>
+                <Check className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="text-emerald-400">Copied!</span>
+              </>
+            ) : (
+              <>
+                <Copy className="w-3.5 h-3.5 text-indigo-400" />
+                <span>Copy Code</span>
+              </>
+            )}
+          </button>
         </div>
 
         <div className="p-6 bg-slate-950/80 font-mono text-xs sm:text-sm overflow-x-auto text-slate-200 leading-relaxed flex-1">
