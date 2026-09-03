@@ -12,6 +12,7 @@ import {
   FileArchive,
   RefreshCw,
   FolderUp,
+  FolderOpen,
 } from 'lucide-react';
 import { DriveUploadResponse, DriveFileItem, listUploadedKits } from '../services/driveApi';
 
@@ -24,6 +25,7 @@ interface DriveUploadModalProps {
   isUploading: boolean;
   uploadResult: DriveUploadResponse | null;
   error: string | null;
+  onOpenPicker?: () => void;
 }
 
 export const DriveUploadModal: React.FC<DriveUploadModalProps> = ({
@@ -35,6 +37,7 @@ export const DriveUploadModal: React.FC<DriveUploadModalProps> = ({
   isUploading,
   uploadResult,
   error,
+  onOpenPicker,
 }) => {
   const [copiedLink, setCopiedLink] = useState(false);
   const [recentUploads, setRecentUploads] = useState<DriveFileItem[]>([]);
@@ -236,14 +239,30 @@ export const DriveUploadModal: React.FC<DriveUploadModalProps> = ({
         </div>
 
         {/* Modal Footer Actions */}
-        <div className="p-4 border-t border-slate-800 bg-slate-900/90 flex items-center justify-between gap-3">
-          <button
-            type="button"
-            onClick={onClose}
-            className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold transition-colors cursor-pointer"
-          >
-            Schließen
-          </button>
+        <div className="p-4 border-t border-slate-800 bg-slate-900/90 flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center space-x-2">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold transition-colors cursor-pointer"
+            >
+              Schließen
+            </button>
+            {onOpenPicker && (
+              <button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  onOpenPicker();
+                }}
+                className="flex items-center space-x-1.5 px-3 py-2 bg-indigo-500/15 hover:bg-indigo-500/25 text-indigo-300 rounded-lg text-xs font-semibold transition-colors border border-indigo-500/30 cursor-pointer"
+                title="Google Picker Dialog zur Dateiauswahl öffnen"
+              >
+                <FolderOpen className="w-3.5 h-3.5 text-indigo-400" />
+                <span>Google Picker</span>
+              </button>
+            )}
+          </div>
 
           <button
             type="button"

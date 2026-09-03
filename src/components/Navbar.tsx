@@ -13,6 +13,7 @@ import {
   Moon,
   RefreshCw,
   Cloud,
+  FolderOpen,
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -20,6 +21,7 @@ interface NavbarProps {
   setActiveTab: (tab: string) => void;
   onDownloadZip: () => void;
   onUploadDrive?: () => void;
+  onOpenPicker?: () => void;
   copied: boolean;
   onCopyPs1: () => void;
   theme: 'dark' | 'light';
@@ -31,6 +33,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   setActiveTab,
   onDownloadZip,
   onUploadDrive,
+  onOpenPicker,
   copied,
   onCopyPs1,
   theme,
@@ -42,6 +45,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'updates', label: 'Updates & Treiber', icon: RefreshCw },
     { id: 'config', label: 'ISO Profile', icon: Sliders },
     { id: 'security', label: 'Security & Wine', icon: Shield },
+    { id: 'picker', label: 'Google Picker', icon: FolderOpen },
     { id: 'tasks', label: 'Google Tasks', icon: CheckSquare },
     { id: 'simulator', label: 'Build Simulator', icon: Terminal },
     { id: 'ai', label: 'Arch AI Expert', icon: Bot },
@@ -95,6 +99,19 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className="hidden sm:inline">{copied ? 'PowerShell Copied!' : 'Copy PowerShell Setup'}</span>
               <span className="sm:hidden">{copied ? 'Copied' : 'Setup.ps1'}</span>
             </button>
+
+            {onOpenPicker && (
+              <button
+                type="button"
+                onClick={onOpenPicker}
+                className="flex items-center space-x-2 px-3.5 py-2 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 hover:text-indigo-200 text-sm font-medium transition-colors border border-indigo-500/30 cursor-pointer"
+                title="Google Picker Dialog öffnen"
+              >
+                <FolderOpen className="w-4 h-4 text-indigo-400" />
+                <span className="hidden md:inline">Google Picker</span>
+                <span className="md:hidden">Picker</span>
+              </button>
+            )}
 
             {onUploadDrive && (
               <button

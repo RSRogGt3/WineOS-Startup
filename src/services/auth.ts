@@ -9,6 +9,8 @@ import {
 } from 'firebase/auth';
 import firebaseConfig from '../../firebase-applet-config.json';
 
+export type { User };
+
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
@@ -16,6 +18,7 @@ export const SCOPES = [
   'https://www.googleapis.com/auth/tasks',
   'https://www.googleapis.com/auth/tasks.readonly',
   'https://www.googleapis.com/auth/drive.file',
+  'https://www.googleapis.com/auth/drive.metadata.readonly',
 ];
 
 const provider = new GoogleAuthProvider();

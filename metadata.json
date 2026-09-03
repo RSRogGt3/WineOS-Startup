@@ -1,6 +1,6 @@
 {
   "name": "Arch Wine OS Studio",
-  "description": "Interactive configuration studio, system health & resource monitor, package manager, ISO build script generator, Google Drive ZIP cloud backup, and Google Tasks sync for Arch Linux Wine OS.",
+  "description": "Interactive configuration studio, system health & resource monitor, package manager, ISO build script generator, Google Drive ZIP cloud backup, Google Picker file selection, and Google Tasks sync for Arch Linux Wine OS.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

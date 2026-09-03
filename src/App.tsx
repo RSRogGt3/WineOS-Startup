@@ -14,6 +14,7 @@ import { GoogleTasksManager } from './components/GoogleTasksManager';
 import { UpdateManager } from './components/UpdateManager';
 import { DriveUploadModal } from './components/DriveUploadModal';
 import { SystemHealthWidget } from './components/SystemHealthWidget';
+import { GooglePickerManager } from './components/GooglePickerManager';
 import { uploadZipToDrive, DriveUploadResponse } from './services/driveApi';
 
 export default function App() {
@@ -147,6 +148,7 @@ export default function App() {
         setActiveTab={setActiveTab}
         onDownloadZip={handleDownloadZip}
         onUploadDrive={handleOpenDriveModal}
+        onOpenPicker={() => setActiveTab('picker')}
         copied={copiedPs1}
         onCopyPs1={handleCopyPs1}
         theme={theme}
@@ -175,6 +177,7 @@ export default function App() {
             setSecurityScript={setSecurityScript}
           />
         )}
+        {activeTab === 'picker' && <GooglePickerManager />}
         {activeTab === 'tasks' && <GoogleTasksManager />}
         {activeTab === 'simulator' && (
           <BuildSimulator
@@ -190,6 +193,7 @@ export default function App() {
         isOpen={isDriveModalOpen}
         onClose={() => setIsDriveModalOpen(false)}
         onUpload={handleUploadZipToDrive}
+        onOpenPicker={() => setActiveTab('picker')}
         fileName={`arch-${config.isoName}-kit.zip`}
         isUploading={isUploadingDrive}
         uploadResult={driveUploadResult}
