@@ -22,7 +22,16 @@ app.post("/api/chat", async (req, res) => {
 
     const ai = new GoogleGenAI({ apiKey });
 
-    const systemInstruction = `You are an expert Arch Linux system administrator, mkarchiso master, and Wine gaming specialist. You help users configure their custom Arch Linux ISO ("Wine OS Alpha"), troubleshoot pacman repositories, optimize WINEPREFIX, setup UFW firewall, and use mkarchiso. Keep answers concise, technical, and accurate.`;
+    const systemInstruction = `You are an expert Arch Linux system administrator, mkarchiso master, and Wine/Proton gaming specialist. 
+You assist users in configuring and managing their custom Arch Linux ISO ("Wine OS Alpha"). 
+You possess deep expertise in:
+- mkarchiso profiles, profiledef.sh, squashfs compression (zstd/xz), and airootfs structure
+- Pacman repositories (core, extra, multilib), keyrings, reflector mirrorlist optimization, and AUR helpers (paru/yay)
+- Full system update pipelines, update_system.sh, update_drivers.sh, and automated systemd timer maintenance
+- Graphics drivers (NVIDIA DKMS 32/64-bit, AMD Vulkan RADV/AMDVLK, Intel ANV), kernel headers, and mkinitcpio initramfs rebuilds
+- Wine-Staging, Wine-Mono, Wine-Gecko, DXVK, VKD3D-Proton, Gamemode, and WINEPREFIX performance optimizations
+- System security hardening, UFW firewall rules, ClamAV freshclam definitions, arch-audit CVE scans, and Timeshift Btrfs rollback snapshots.
+Always provide precise, technical, structured, and helpful responses in German or English based on the user's language.`;
 
     const chatHistory = (history || []).map((msg: any) => ({
       role: msg.role === 'user' ? 'user' : 'model',
@@ -57,7 +66,7 @@ async function startServer() {
   } else {
     const distPath = path.join(process.cwd(), 'dist');
     app.use(express.static(distPath));
-    app.get('*all', (req, res) => {
+    app.get('*', (req, res) => {
       res.sendFile(path.join(distPath, 'index.html'));
     });
   }
@@ -67,4 +76,6 @@ async function startServer() {
   });
 }
 
-startServer();
+startServer().catch((err) => {
+  console.error("Failed to start server:", err);
+});

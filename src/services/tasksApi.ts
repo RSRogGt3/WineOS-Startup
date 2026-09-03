@@ -111,3 +111,39 @@ export async function clearCompletedTasks(taskListId: string): Promise<void> {
     method: 'POST',
   });
 }
+
+export type TaskPriority = 'High' | 'Medium' | 'Low';
+
+export function parseTaskPriority(task: GoogleTask): TaskPriority {
+  const text = `${task.notes || ''} ${task.title || ''}`;
+  if (/\[(?:Priority:\s*)?High\]/i.test(text) || /\b(priority:\s*high|high priority)\b/i.test(text)) {
+    return 'High';
+  }
+  if (/\[(?:Priority:\s*)?Low\]/i.test(text) || /\b(priority:\s*low|low priority)\b/i.test(text)) {
+    return 'Low';
+  }
+  if (/\[(?:Priority:\s*)?Medium\]/i.test(text) || /\b(priority:\s*medium|medium priority)\b/i.test(text)) {
+    return 'Medium';
+  }
+  return 'Medium';
+}
+
+export function encodeTaskNotesWithPriority(notes: string | undefined, priority: TaskPriority): string {
+  const cleanNotes = (notes || '')
+    .replace(/\[Priority:\s*(High|Medium|Low)\]\s*\n?/gi, '')
+    .replace(/\[(High|Medium|Low)\]\s*\n?/gi, '')
+    .trim();
+  
+  if (cleanNotes.length > 0) {
+    return `[Priority: ${priority}]\n${cleanNotes}`;
+  }
+  return `[Priority: ${priority}]`;
+}
+
+export function getCleanNotes(notes?: string): string {
+  if (!notes) return '';
+  return notes
+    .replace(/\[Priority:\s*(High|Medium|Low)\]\s*\n?/gi, '')
+    .replace(/\[(High|Medium|Low)\]\s*\n?/gi, '')
+    .trim();
+}

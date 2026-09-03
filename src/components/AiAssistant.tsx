@@ -110,6 +110,31 @@ export const AiAssistant: React.FC = () => {
         )}
       </div>
 
+      {/* Suggested Quick Prompts */}
+      <div className="px-6 py-2.5 bg-slate-950/90 border-t border-slate-800/80 flex items-center space-x-2 overflow-x-auto text-xs no-scrollbar">
+        <span className="text-slate-500 text-[11px] font-semibold uppercase tracking-wider shrink-0 flex items-center space-x-1">
+          <Sparkles className="w-3 h-3 text-indigo-400" />
+          <span>Vorschläge:</span>
+        </span>
+        {[
+          'Wie läuft das Rollback mit Timeshift bei Kernel-Fehlern?',
+          'Wie installiere ich NVIDIA 32-Bit Vulkan für Wine?',
+          'Wie automatisiere ich wöchentliche Updates per Systemd?',
+          'Welche Pakete fehlen für DirectX 12 / VKD3D?',
+        ].map((promptText, pIdx) => (
+          <button
+            key={pIdx}
+            type="button"
+            onClick={() => {
+              setInput(promptText);
+            }}
+            className="px-2.5 py-1 rounded-full bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 text-[11px] transition-colors whitespace-nowrap cursor-pointer shrink-0"
+          >
+            {promptText}
+          </button>
+        ))}
+      </div>
+
       <form onSubmit={handleSend} className="p-4 bg-slate-950 border-t border-slate-800 flex items-center space-x-3">
         <input
           type="text"

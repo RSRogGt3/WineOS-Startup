@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ProjectFiles } from '../types';
-import { FileText, Copy, Check, Terminal, Shield, Package, Cpu } from 'lucide-react';
+import { FileText, Copy, Check, Terminal, Shield, Package, Cpu, RefreshCw, Wrench, Clock, Cog } from 'lucide-react';
 
 interface FileExplorerProps {
   files: ProjectFiles;
@@ -16,6 +16,10 @@ export const FileExplorer: React.FC<FileExplorerProps> = ({ files }) => {
     { id: 'packages', name: 'packages.x86_64', path: 'arch_wine_os/packages.x86_64', icon: Package, desc: 'Package manifest list installed in the live/installed system' },
     { id: 'pacmanConf', name: 'pacman.conf', path: 'arch_wine_os/pacman.conf', icon: Shield, desc: 'Pacman repository and mirror settings (core, extra, multilib)' },
     { id: 'securitySetupSh', name: 'security_setup.sh', path: 'arch_wine_os/airootfs/root/security_setup.sh', icon: Shield, desc: 'Post-install security script for UFW firewall & ClamAV' },
+    { id: 'updateSystemSh', name: 'update_system.sh', path: 'arch_wine_os/airootfs/usr/local/bin/update_system.sh', icon: RefreshCw, desc: 'Complete System, AUR, DKMS & Security Audit Updater' },
+    { id: 'updateDriversSh', name: 'update_drivers.sh', path: 'arch_wine_os/airootfs/usr/local/bin/update_drivers.sh', icon: Wrench, desc: 'Hardware & GPU Driver Diagnostics and Stack Updater' },
+    { id: 'systemUpdateService', name: 'system-update.service', path: 'arch_wine_os/airootfs/etc/systemd/system/system-update.service', icon: Cog, desc: 'systemd service unit executing automated system updates' },
+    { id: 'systemUpdateTimer', name: 'system-update.timer', path: 'arch_wine_os/airootfs/etc/systemd/system/system-update.timer', icon: Clock, desc: 'systemd timer schedule (Automatic vs. Manual mode trigger)' },
     { id: 'setupPs1', name: 'setup.ps1', path: './setup.ps1', icon: FileText, desc: 'PowerShell automation script to generate the entire workspace' },
   ];
 
